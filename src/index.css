@@ -3,6 +3,7 @@
   --dark-blue: #100e1d;
   --blue: #1e213a;
   --medium-blue: #585676;
+  --grayish-blue: #88869d;
   --light-blue: #e7e7eb;
   --gray: #6e707a;
   --font-family: "Raleway", system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -12,6 +13,11 @@ body {
   margin: 0;
   font-family: var(--font-family);
   min-height: 100vh;
+  background-color: var(--dark-blue);
+}
+
+p {
+  margin: 0;
 }
 
 .material-symbols-outlined {
