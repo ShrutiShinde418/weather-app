@@ -1,3 +1,4 @@
+import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
@@ -14,13 +15,22 @@ const TempUnitBtn = styled.button`
   cursor: pointer;
 `;
 
-const UnitButton = ({ content, isSelected }) => {
-  return <TempUnitBtn isSelected={isSelected}>{content}</TempUnitBtn>;
+const UnitButton = ({ content, isSelected, onClick }) => {
+  return (
+    <TempUnitBtn
+      isSelected={isSelected}
+      onClick={() => onClick(content)}
+      type="button"
+    >
+      {content}
+    </TempUnitBtn>
+  );
 };
 
 UnitButton.propTypes = {
   content: PropTypes.string,
   isSelected: PropTypes.bool,
+  onClick: PropTypes.func,
 };
 
 export default UnitButton;

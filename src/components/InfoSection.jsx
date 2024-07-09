@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import { Card, CardHeader } from "./Card.styled";
 
@@ -14,6 +15,20 @@ const HighlightsWrapper = styled.div`
   gap: 2em;
 `;
 
+const InfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.15em;
+  & p:last-of-type {
+    font-weight: 700;
+    font-size: 64px;
+    & span {
+      font-weight: 500;
+      font-size: 36px;
+    }
+  }
+`;
+
 const InfoSection = () => {
   return (
     <section>
@@ -22,26 +37,45 @@ const InfoSection = () => {
       <HighlightsWrapper>
         <Card>
           <CardHeader>
-            <p>Wind Status</p>
-            <p>7 mph</p>
+            <InfoWrapper>
+              <p>Wind Status</p>
+              <p>
+                7 <span>mph</span>
+              </p>
+            </InfoWrapper>
+            <div>
+              <p>WSW</p>
+            </div>
           </CardHeader>
         </Card>
         <Card>
           <CardHeader>
-            <p>Humidity</p>
-            <p>84%</p>
+            <InfoWrapper>
+              <p>Humidity</p>
+              <p>
+                84 <span>%</span>
+              </p>
+            </InfoWrapper>
           </CardHeader>
         </Card>
         <Card>
           <CardHeader>
-            <p>Visibility</p>
-            <p>6.8 miles</p>
+            <InfoWrapper>
+              <p>Visibility</p>
+              <p>
+                6.8 <span>miles</span>
+              </p>
+            </InfoWrapper>
           </CardHeader>
         </Card>
         <Card>
           <CardHeader>
-            <p>Air Pressure</p>
-            <p>998 mb</p>
+            <InfoWrapper>
+              <p>Air Pressure</p>
+              <p>
+                998 <span>mb</span>
+              </p>
+            </InfoWrapper>
           </CardHeader>
         </Card>
       </HighlightsWrapper>
