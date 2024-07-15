@@ -35,7 +35,7 @@ const InfoSection = () => {
       {/* eslint-disable-next-line react/no-unescaped-entities */}
       <HighlightsText>Today's Highlights</HighlightsText>;
       <HighlightsWrapper>
-        <Card>
+        <Card fullWidth>
           <CardHeader>
             <InfoWrapper>
               <p>Wind Status</p>
@@ -48,7 +48,7 @@ const InfoSection = () => {
             </div>
           </CardHeader>
         </Card>
-        <Card>
+        <Card fullWidth>
           <CardHeader>
             <InfoWrapper>
               <p>Humidity</p>
@@ -58,7 +58,7 @@ const InfoSection = () => {
             </InfoWrapper>
           </CardHeader>
         </Card>
-        <Card>
+        <Card fullWidth>
           <CardHeader>
             <InfoWrapper>
               <p>Visibility</p>
@@ -68,7 +68,7 @@ const InfoSection = () => {
             </InfoWrapper>
           </CardHeader>
         </Card>
-        <Card>
+        <Card fullWidth>
           <CardHeader>
             <InfoWrapper>
               <p>Air Pressure</p>

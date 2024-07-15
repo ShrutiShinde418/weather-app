@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import "./App.css";
 import Sidebar from "./components/Sidebar/Sidebar";
 import ForecastCard from "./components/ForecastCard";
@@ -6,6 +6,7 @@ import sleet from "./assets/Sleet.png";
 import styled from "styled-components";
 import UnitButton from "./components/UnitButton";
 import InfoSection from "./components/InfoSection";
+import { WeatherDataContext } from "./store/WeatherContext";
 import ForecastSection from "./components/ForecastSection";
 
 const Main = styled.div`
@@ -37,23 +38,14 @@ const buttons = [
 ];
 
 function App() {
-  const [selectedUnit, setSelectedUnit] = useState("°C");
-  const handleSelectUnit = (unit) => {
-    setSelectedUnit(unit);
-  };
+  const weatherCtx = useContext(WeatherDataContext);
   return (
     <Main>
       <Sidebar />
       <Section>
         <Menu>
           {buttons.map((button) => {
-            return (
-              <UnitButton
-                content={button.content}
-                onClick={handleSelectUnit}
-                isSelected={selectedUnit === button.content}
-              />
-            );
+            return <UnitButton key={button.content} content={button.content} />;
           })}
         </Menu>
         <ForecastSection />

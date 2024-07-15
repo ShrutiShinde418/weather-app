@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   DayInfo,
   GetLocationButton,
@@ -11,8 +11,10 @@ import {
 } from "./Sidebar.styled";
 import shower from "../../assets/Shower.png";
 import "../../index.css";
+import { WeatherDataContext } from "../../store/WeatherContext";
 
 const Sidebar = () => {
+  const weatherCtx = useContext(WeatherDataContext);
   return (
     <Navbar>
       <NavbarSearch>
@@ -36,7 +38,7 @@ const Sidebar = () => {
       </DayInfo>
       <LocationInfo>
         <span className="material-symbols-outlined">location_on</span>
-        <p>Helsinki</p>
+        <p>{weatherCtx?.weatherData?.data?.city?.name}</p>
       </LocationInfo>
     </Navbar>
   );

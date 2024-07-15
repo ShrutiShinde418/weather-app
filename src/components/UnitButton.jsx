@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { WeatherDataContext } from "../store/WeatherContext";
 
 const TempUnitBtn = styled.button`
   border-radius: 50%;
@@ -15,11 +16,12 @@ const TempUnitBtn = styled.button`
   cursor: pointer;
 `;
 
-const UnitButton = ({ content, isSelected, onClick }) => {
+const UnitButton = ({ content, isSelected }) => {
+  const weatherCtx = useContext(WeatherDataContext);
   return (
     <TempUnitBtn
-      isSelected={isSelected}
-      onClick={() => onClick(content)}
+      isSelected={weatherCtx.selectedUnit === content}
+      onClick={() => weatherCtx.handleSelectUnit(content)}
       type="button"
     >
       {content}

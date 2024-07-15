@@ -8,8 +8,8 @@ export const Card = styled.div`
   gap: 2em;
   background-color: #1e213a;
   color: #fff;
-  height: fit-content;
-  width: fit-content;
+  height: ${(props) => (props.fullWidth ? "auto" : "fit-content")};
+  width: ${(props) => (props.fullWidth ? "auto" : "fit-content")};
 `;
 
 export const CardHeader = styled.div`
