@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { Card, CardHeader } from "./Card.styled";
+import { WeatherDataContext } from "../store/WeatherContext";
 
 const HighlightsText = styled.p`
   font-weight: 700;
@@ -30,6 +31,7 @@ const InfoWrapper = styled.div`
 `;
 
 const InfoSection = () => {
+  const weatherCtx = useContext(WeatherDataContext);
   return (
     <section>
       {/* eslint-disable-next-line react/no-unescaped-entities */}
@@ -40,7 +42,10 @@ const InfoSection = () => {
             <InfoWrapper>
               <p>Wind Status</p>
               <p>
-                7 <span>mph</span>
+                {(
+                  weatherCtx?.weatherData?.data?.wind?.speed * 2.23694
+                ).toFixed()}&nbsp;
+                <span>mph</span>
               </p>
             </InfoWrapper>
             <div>
@@ -53,7 +58,7 @@ const InfoSection = () => {
             <InfoWrapper>
               <p>Humidity</p>
               <p>
-                84 <span>%</span>
+                {weatherCtx?.weatherData?.data?.main?.humidity} <span>%</span>
               </p>
             </InfoWrapper>
           </CardHeader>
@@ -63,7 +68,11 @@ const InfoSection = () => {
             <InfoWrapper>
               <p>Visibility</p>
               <p>
-                6.8 <span>miles</span>
+                {(weatherCtx?.weatherData?.data?.visibility * 0.000621).toFixed(
+                  1
+                )}
+                &nbsp;
+                <span>miles</span>
               </p>
             </InfoWrapper>
           </CardHeader>
@@ -73,7 +82,7 @@ const InfoSection = () => {
             <InfoWrapper>
               <p>Air Pressure</p>
               <p>
-                998 <span>mb</span>
+                {weatherCtx?.weatherData?.data?.main?.pressure} <span>mb</span>
               </p>
             </InfoWrapper>
           </CardHeader>

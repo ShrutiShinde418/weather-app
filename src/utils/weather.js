@@ -4,9 +4,11 @@ import axios from "axios";
 export const getWeatherByCurrentLocation = async (location) => {
   try {
     const response = await axios.get(
-      `${import.meta.env.VITE_FORECAST_URL}lat=${location.latitude}&lon=${
-        location.longitude
-      }${import.meta.env.VITE_FORECAST_URL_OPTIONS}`
+      `${import.meta.env.VITE_CURRENT_WEATHER_URL}lat=${
+        location.latitude
+      }&lon=${location.longitude}${
+        import.meta.env.VITE_CURRENT_WEATHER_OPTIONS
+      }`
     );
     return {
       status: response.status,
@@ -21,4 +23,9 @@ export const getWeatherByCurrentLocation = async (location) => {
       data: error?.response?.data,
     };
   }
+};
+
+export const getCurrentWeather = async (results) => {
+  const weatherData = await getWeatherByCurrentLocation(results);
+  return weatherData;
 };
