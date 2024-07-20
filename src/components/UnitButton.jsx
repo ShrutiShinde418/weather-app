@@ -20,7 +20,7 @@ const UnitButton = ({ content, isSelected }) => {
   const weatherCtx = useContext(WeatherDataContext);
   return (
     <TempUnitBtn
-      isSelected={weatherCtx.selectedUnit === content}
+      isSelected={weatherCtx.selectedUnit.unit === content}
       onClick={() => weatherCtx.handleSelectUnit(content)}
       type="button"
     >

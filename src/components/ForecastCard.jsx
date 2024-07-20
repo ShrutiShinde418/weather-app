@@ -25,10 +25,12 @@ const ForecastCard = ({ title, icon, now, then, tempUnit }) => {
       </CardHeader>
       <CardFooter>
         <p>
-          {now}°{tempUnit}
+          {now}
+          {tempUnit}
         </p>
         <p>
-          {then}°{tempUnit}
+          {then}
+          {tempUnit}
         </p>
       </CardFooter>
     </Card>

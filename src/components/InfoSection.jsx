@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { Fragment, useContext } from "react";
 import styled from "styled-components";
 import { Card, CardHeader } from "./Card.styled";
 import { WeatherDataContext } from "../store/WeatherContext";
+import { degToCompass } from "../utils/helpers";
 
 const HighlightsText = styled.p`
   font-weight: 700;
@@ -42,14 +43,19 @@ const InfoSection = () => {
             <InfoWrapper>
               <p>Wind Status</p>
               <p>
-                {(
-                  weatherCtx?.weatherData?.data?.wind?.speed * 2.23694
-                ).toFixed()}&nbsp;
+                {weatherCtx?.isLoading
+                  ? "--"
+                  : weatherCtx?.selectedUnit.unit === "°F"
+                  ? weatherCtx?.weatherData?.data?.wind?.speed.toFixed()
+                  : (
+                      weatherCtx?.weatherData?.data?.wind?.speed * 2.23694
+                    ).toFixed()}
+                &nbsp;
                 <span>mph</span>
               </p>
             </InfoWrapper>
             <div>
-              <p>WSW</p>
+              <p>{degToCompass(weatherCtx?.weatherData?.data?.wind?.deg)}</p>
             </div>
           </CardHeader>
         </Card>
@@ -58,7 +64,10 @@ const InfoSection = () => {
             <InfoWrapper>
               <p>Humidity</p>
               <p>
-                {weatherCtx?.weatherData?.data?.main?.humidity} <span>%</span>
+                {weatherCtx?.isLoading
+                  ? "--"
+                  : weatherCtx?.weatherData?.data?.main?.humidity}
+                <span>%</span>
               </p>
             </InfoWrapper>
           </CardHeader>
@@ -68,9 +77,11 @@ const InfoSection = () => {
             <InfoWrapper>
               <p>Visibility</p>
               <p>
-                {(weatherCtx?.weatherData?.data?.visibility * 0.000621).toFixed(
-                  1
-                )}
+                {weatherCtx?.isLoading
+                  ? "--"
+                  : (
+                      weatherCtx?.weatherData?.data?.visibility * 0.000621
+                    ).toFixed(1)}
                 &nbsp;
                 <span>miles</span>
               </p>
@@ -82,7 +93,15 @@ const InfoSection = () => {
             <InfoWrapper>
               <p>Air Pressure</p>
               <p>
-                {weatherCtx?.weatherData?.data?.main?.pressure} <span>mb</span>
+                {weatherCtx?.isLoading ? (
+                  "--"
+                ) : (
+                  <Fragment>
+                    {weatherCtx?.weatherData?.data?.main?.pressure}
+                  </Fragment>
+                )}
+                &nbsp;
+                <span>mb</span>
               </p>
             </InfoWrapper>
           </CardHeader>

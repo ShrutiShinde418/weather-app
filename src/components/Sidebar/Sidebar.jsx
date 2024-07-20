@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, Fragment } from "react";
 import {
   DayInfo,
   GetLocationButton,
@@ -16,30 +16,35 @@ import { WeatherDataContext } from "../../store/WeatherContext";
 const Sidebar = () => {
   const weatherCtx = useContext(WeatherDataContext);
   const date = new Date();
-  let results;
-  const getCurrentWeather = async () => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      results = {
-        latitude: position.coords.latitude.toFixed(2),
-        longitude: position.coords.longitude.toFixed(2),
-      };
-    });
-  };
   return (
     <Navbar>
       <NavbarSearch>
         <SearchButton>Search for Places</SearchButton>
-        <GetLocationButton onClick={() => getCurrentWeather()}>
+        <GetLocationButton
+          onClick={() =>
+            weatherCtx.handleSelectUnit(weatherCtx.selectedUnit.unit)
+          }
+        >
           <span className="material-symbols-outlined">my_location</span>
         </GetLocationButton>
       </NavbarSearch>
       <WeatherStats>
         <img src={shower} alt="Shower" />
         <TemperatureStats>
-          <span>{weatherCtx?.weatherData?.data?.main?.temp.toFixed()}</span>
-          <span>{weatherCtx?.selectedUnit}</span>
+          <span>
+            {weatherCtx.isLoading
+              ? "--"
+              : weatherCtx?.weatherData?.data?.main?.temp.toFixed()}
+          </span>
+          <span>{weatherCtx?.selectedUnit.unit}</span>
         </TemperatureStats>
-        <p>{weatherCtx?.weatherData?.data?.weather[0]?.main}</p>
+        <p>
+          {weatherCtx?.isLoading ? (
+            <p>Loading...</p>
+          ) : (
+            weatherCtx?.weatherData?.data?.weather[0]?.main
+          )}
+        </p>
       </WeatherStats>
       <DayInfo>
         <p>Today</p>
@@ -51,8 +56,14 @@ const Sidebar = () => {
         </p>
       </DayInfo>
       <LocationInfo>
-        <span className="material-symbols-outlined">location_on</span>
-        <p>{weatherCtx?.weatherData?.data?.name}</p>
+        {weatherCtx.isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <Fragment>
+            <span className="material-symbols-outlined">location_on</span>
+            <p>{weatherCtx?.weatherData?.data?.name}</p>
+          </Fragment>
+        )}
       </LocationInfo>
     </Navbar>
   );

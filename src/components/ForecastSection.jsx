@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import ForecastCard from "./ForecastCard";
 import sleet from "../assets/Sleet.png";
 import clear from "../assets/Clear.png";
 import hail from "../assets/Hail.png";
+import { WeatherDataContext } from "../store/WeatherContext";
 
 const Wrapper = styled.div`
   display: flex;
@@ -12,6 +13,7 @@ const Wrapper = styled.div`
 `;
 
 const ForecastSection = () => {
+  const weatherCtx = useContext(WeatherDataContext);
   return (
     <Wrapper>
       <ForecastCard
@@ -19,14 +21,14 @@ const ForecastSection = () => {
         icon={sleet}
         now="16"
         then="11"
-        tempUnit="C"
+        tempUnit={weatherCtx.selectedUnit.unit}
       />
       <ForecastCard
         title="Tomorrow"
         icon={sleet}
         now="16"
         then="11"
-        tempUnit="C"
+        tempUnit={weatherCtx.selectedUnit.unit}
       />
     </Wrapper>
   );
