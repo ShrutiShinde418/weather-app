@@ -1,6 +1,6 @@
 import React, { Fragment, useContext } from "react";
 import styled from "styled-components";
-import { Card, CardHeader } from "./Card.styled";
+import { CardWrapper, CardHeader } from "./Card/Card.styled";
 import { WeatherDataContext } from "../store/WeatherContext";
 import { degToCompass } from "../utils/helpers";
 
@@ -17,7 +17,7 @@ const HighlightsWrapper = styled.div`
   gap: 2em;
 `;
 
-const InfoWrapper = styled.div`
+export const InfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.15em;
@@ -38,7 +38,7 @@ const InfoSection = () => {
       {/* eslint-disable-next-line react/no-unescaped-entities */}
       <HighlightsText>Today's Highlights</HighlightsText>;
       <HighlightsWrapper>
-        <Card fullWidth>
+        <CardWrapper $fullWidth>
           <CardHeader>
             <InfoWrapper>
               <p>Wind Status</p>
@@ -58,8 +58,8 @@ const InfoSection = () => {
               <p>{degToCompass(weatherCtx?.weatherData?.data?.wind?.deg)}</p>
             </div>
           </CardHeader>
-        </Card>
-        <Card fullWidth>
+        </CardWrapper>
+        <CardWrapper $fullWidth>
           <CardHeader>
             <InfoWrapper>
               <p>Humidity</p>
@@ -71,8 +71,8 @@ const InfoSection = () => {
               </p>
             </InfoWrapper>
           </CardHeader>
-        </Card>
-        <Card fullWidth>
+        </CardWrapper>
+        <CardWrapper $fullWidth>
           <CardHeader>
             <InfoWrapper>
               <p>Visibility</p>
@@ -87,8 +87,8 @@ const InfoSection = () => {
               </p>
             </InfoWrapper>
           </CardHeader>
-        </Card>
-        <Card fullWidth>
+        </CardWrapper>
+        <CardWrapper $fullWidth>
           <CardHeader>
             <InfoWrapper>
               <p>Air Pressure</p>
@@ -105,7 +105,7 @@ const InfoSection = () => {
               </p>
             </InfoWrapper>
           </CardHeader>
-        </Card>
+        </CardWrapper>
       </HighlightsWrapper>
     </section>
   );

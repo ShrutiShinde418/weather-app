@@ -25,6 +25,35 @@ export const getWeatherByCurrentLocation = async (location, type) => {
   }
 };
 
+export const getWeatherForecast = async (location, type) => {
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_FORECAST_URL}lat=${location.latitude}&lon=${
+        location.longitude
+      }${import.meta.env.VITE_FORECAST_URL_OPTIONS}&units=${type}`
+    );
+    const filteredData = response.data.list.filter((forecastItem) => {
+      const today = new Date();
+      return (
+        forecastItem.dt_txt.slice(8, 10) !== String(today.getDate()) &&
+        forecastItem.dt_txt.slice(11, 13) === "00"
+      );
+    });
+    return {
+      data: filteredData,
+      status: response?.status,
+      statusText: response?.statusText,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      status: error?.response?.status,
+      statusText: error?.response?.statusText,
+      data: error?.response?.data,
+    };
+  }
+};
+
 export const getCurrentLocation = async () => {
   return new Promise((resolve, reject) => {
     const success = (position) => {

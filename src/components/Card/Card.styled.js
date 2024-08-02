@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Card = styled.div`
+export const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,8 +8,8 @@ export const Card = styled.div`
   gap: 2em;
   background-color: #1e213a;
   color: #fff;
-  height: ${(props) => (props.fullWidth ? "auto" : "fit-content")};
-  width: ${(props) => (props.fullWidth ? "auto" : "fit-content")};
+  height: ${(props) => (props.$fullWidth ? "auto" : "fit-content")};
+  width: ${(props) => (props.$fullWidth ? "auto" : "fit-content")};
 `;
 
 export const CardHeader = styled.div`

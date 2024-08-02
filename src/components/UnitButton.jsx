@@ -11,16 +11,16 @@ const TempUnitBtn = styled.button`
   height: 40px;
   width: 40px;
   font-family: inherit;
-  background-color: ${(props) => (props.isSelected ? "#E7E7EB" : "#585676")};
-  color: ${(props) => (props.isSelected ? "#110E3C" : "#E7E7EB")};
+  background-color: ${(props) => (props.$isSelected ? "#E7E7EB" : "#585676")};
+  color: ${(props) => (props.$isSelected ? "#110E3C" : "#E7E7EB")};
   cursor: pointer;
 `;
 
-const UnitButton = ({ content, isSelected }) => {
+const UnitButton = ({ content, $isSelected }) => {
   const weatherCtx = useContext(WeatherDataContext);
   return (
     <TempUnitBtn
-      isSelected={weatherCtx.selectedUnit.unit === content}
+      $isSelected={weatherCtx.selectedUnit.unit === content}
       onClick={() => weatherCtx.handleSelectUnit(content)}
       type="button"
     >
@@ -31,7 +31,7 @@ const UnitButton = ({ content, isSelected }) => {
 
 UnitButton.propTypes = {
   content: PropTypes.string,
-  isSelected: PropTypes.bool,
+  $isSelected: PropTypes.bool,
   onClick: PropTypes.func,
 };
 

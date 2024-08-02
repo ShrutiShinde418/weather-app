@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { Card, CardHeader } from "./Card.styled";
+import { CardWrapper, CardHeader } from "./Card/Card.styled";
 
 const CardFooter = styled.div`
   display: flex;
@@ -18,7 +18,7 @@ const CardFooter = styled.div`
 
 const ForecastCard = ({ title, icon, now, then, tempUnit }) => {
   return (
-    <Card>
+    <CardWrapper>
       <CardHeader>
         <p>{title}</p>
         <img src={icon} alt="title" />
@@ -33,15 +33,15 @@ const ForecastCard = ({ title, icon, now, then, tempUnit }) => {
           {tempUnit}
         </p>
       </CardFooter>
-    </Card>
+    </CardWrapper>
   );
 };
 
 ForecastCard.propTypes = {
   title: PropTypes.string,
   icon: PropTypes.string,
-  now: PropTypes.string,
-  then: PropTypes.string,
+  now: PropTypes.number,
+  then: PropTypes.number,
   tempUnit: PropTypes.string,
 };
 

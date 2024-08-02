@@ -40,7 +40,7 @@ const Sidebar = () => {
         </TemperatureStats>
         <p>
           {weatherCtx?.isLoading ? (
-            <p>Loading...</p>
+            <span>Loading...</span>
           ) : (
             weatherCtx?.weatherData?.data?.weather[0]?.main
           )}
@@ -57,7 +57,7 @@ const Sidebar = () => {
       </DayInfo>
       <LocationInfo>
         {weatherCtx.isLoading ? (
-          <p>Loading...</p>
+          <span>Loading...</span>
         ) : (
           <Fragment>
             <span className="material-symbols-outlined">location_on</span>

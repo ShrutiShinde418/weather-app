@@ -3,6 +3,7 @@ import React, { createContext, useState, useEffect } from "react";
 import {
   getWeatherByCurrentLocation,
   getCurrentLocation,
+  getWeatherForecast,
 } from "../utils/weather";
 import { temperatureOptions } from "../utils/helpers";
 
@@ -10,31 +11,40 @@ export const WeatherDataContext = createContext({
   weatherData: {},
   setWeatherDataHandler: (weather) => {},
   selectedUnit: {},
+  weatherForecast: {},
   handleSelectUnit: (unit) => {},
   isLoading: false,
 });
 
 const WeatherContext = ({ children }) => {
-  let results;
+  let results, weatherForecastResult, locationResult;
   const [selectedUnit, setSelectedUnit] = useState({
     unit: "°C",
     type: "metric",
   });
   const [weatherData, setWeatherData] = useState({});
+  const [weatherForecast, setWeatherForecast] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const handleSelectUnit = async (unit) => {
     setIsLoading(true);
     setSelectedUnit({ unit, type: temperatureOptions[unit] });
-    results = await getCurrentLocation();
-    console.log(unit);
+    locationResult = await getCurrentLocation();
     results = await getWeatherByCurrentLocation(
       {
-        latitude: results?.latitude,
-        longitude: results?.longitude,
+        latitude: locationResult?.latitude,
+        longitude: locationResult?.longitude,
+      },
+      temperatureOptions[unit]
+    );
+    weatherForecastResult = await getWeatherForecast(
+      {
+        latitude: locationResult?.latitude,
+        longitude: locationResult?.longitude,
       },
       temperatureOptions[unit]
     );
     setWeatherData(results);
+    setWeatherForecast(weatherForecastResult);
     setIsLoading(false);
   };
 
@@ -45,9 +55,17 @@ const WeatherContext = ({ children }) => {
   useEffect(() => {
     setIsLoading(true);
     const getWeather = async () => {
-      results = await getCurrentLocation();
-      results = await getWeatherByCurrentLocation(results, selectedUnit?.type);
+      locationResult = await getCurrentLocation();
+      weatherForecastResult = await getWeatherForecast(
+        locationResult,
+        selectedUnit?.type
+      );
+      results = await getWeatherByCurrentLocation(
+        locationResult,
+        selectedUnit?.type
+      );
       setWeatherData(results);
+      setWeatherForecast(weatherForecastResult);
       setIsLoading(false);
     };
     getWeather();
@@ -56,6 +74,7 @@ const WeatherContext = ({ children }) => {
     <WeatherDataContext.Provider
       value={{
         weatherData,
+        weatherForecast,
         selectedUnit,
         handleSelectUnit,
         isLoading,
